@@ -3,7 +3,7 @@
  *
  * Author :Liu Peng-Hong  Institute of Scientific Computing, Nankai Univ.
  *
- * Global Type Header File
+ * Global mutex
  *
  * Feb 11, 2011  Original Design
  *
