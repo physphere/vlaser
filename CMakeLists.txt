@@ -13,5 +13,6 @@ set(CMAKE_CXX_FLAGS "")
 set(CMAKE_VERBOSE_MAKEFILE on)
 add_definitions(-DVLASER_DEBUG_OUT)
 
-
+add_executable(vlaser_test test/vlaser_test.cpp)
+target_link_libraries(vlaser_test vlaser pthread)
 
