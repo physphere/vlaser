@@ -5,7 +5,7 @@ V*irtual* L*inear* A*ddress* SER*vice* - A Simulator for CC-NUMA Architecture
 
 **NUMA** (Non-Uniform Memory Access) is distributed memory system that:
 - Processors in the system all have their local memories
-- All these local memories are spliced into an single address space
+- All these local memories are spliced into a single address space
 which can be accessed by all processors
 - Processors and local memories are connected by a network,
 speeds of accessing local memory and remote memory are different
@@ -56,12 +56,12 @@ to the remote processors one by one.
 In order to achieve this, **vlaser** divides the local memories into
 **memory blocks**, which have the same size as cache blocks (cache lines).
 Local memory maintains one list for every memory block,
-which are called as the **holder list**.
+which is called as the **holder list**.
 The holder lists record all the processors which are **holding** the memory
 block in their caches, along with the **cache status**.
 If a processor wants a memory block from a remote memory, it first send
 a request to the remote memory, than the remote memory will send cache status
-update messages to all the block's holder one by one according to the
+update messages to all the block's holders one by one, according to the
 **holder list**.
 
 Following diagram shows a cache status transition caused by a remote block
@@ -74,7 +74,7 @@ processor 2's local memory for writing. So the processor 2 is call as
 **host** here. The **host** find that there are three processors holding
 the block's copies in their caches: processor 2 itself, processor 3,
 and processor 4. As the original request is a write request, the **host**
-will send **set invalid** message to processor 3 and processor 4's memory,
+will send **set invalid** message to processor 3 and processor 4's local memory,
 than it set its own copy of the memory block as invalid too. Fortunately,
 all the cache copies are **shared**, and no **writeback** is needed.
 Finally, the **host** send the memory block and a confirmation message back to
@@ -90,7 +90,7 @@ initiates the requests to remote memories.
 from remote processors.
 
 One import thing is that, requests from remote processors are **queued** in
-the **services thread**. New request will not be processed until the old
+the **service thread**. New request will not be processed until the old
 request's handling is completely finished, which means that all the relevant
 cache statuses (local or remote) have been updated correctly and the
 acknowledgement message has been sent back to the original requester.
@@ -108,9 +108,9 @@ is the class **lsal_fileemulate**, which uses local disk file as the local
 memory. So the **vlaser** is actually working like a **cached distributed block
 storage system**.
 
-**vlaser**'s design work and implementation is accomplished at
+**vlaser**'s design work and implementation was accomplished at
 **Institute of Scientific Computing, Nankai University** in Mar 2011.
-**vlaser** is tested on the **NKStars** cluster.
+**vlaser** was tested on the **NKStars** cluster.
 
 ![Nankai_Physics](./readme_resource/nankai_physics.png "Nankai Physics")
  
