@@ -1,7 +1,7 @@
 vlaser
 ====
-####V*irtual* L*inear* A*ddress* SER*vice* - A Simulator for CC-NUMA Architecture
-
+V*irtual* L*inear* A*ddress* SER*vice* - A Simulator for CC-NUMA Architecture
+----
 
 **NUMA** (Non-Uniform Memory Access) is distributed memory system that:
 - Processors in the system all have their local memories
