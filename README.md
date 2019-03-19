@@ -29,7 +29,7 @@ concurrently. So to ensure the correctness and integrity of the
 data in the caches, **MESI** is used as the cache coherent protocol between
 the processors.
  
-**MESI** stands for the four status of cache blocks (cache lines):
+**MESI** stands for the four statuses of cache blocks (cache lines):
 + **Modified**
 + **Exclusive**
 + **Shared**
@@ -69,20 +69,20 @@ write request:
 
 ![MESI_remote_write](./readme_resource/vlaser_mesi_transition.png)
 
-In this diagram, processor 1 request a memory block that belongs to the
+In this diagram, processor 1 requests a memory block that belongs to the
 processor 2's local memory for writing. So the processor 2 is call as
-**host** here. The **host** find that there are three processors holding
+**host** here. The **host** finds that there are three processors holding
 the block's copies in their caches: processor 2 itself, processor 3,
 and processor 4. As the original request is a write request, the **host**
 will send **set invalid** message to processor 3 and processor 4's local memory,
-than it set its own copy of the memory block as invalid too. Fortunately,
+than it will set its own copy of the memory block as invalid too. Fortunately,
 all the cache copies are **shared**, and no **writeback** is needed.
-Finally, the **host** send the memory block and a confirmation message back to
-the original requester (processor 1), processor 1 get this block and set
+Finally, the **host** sends the memory block and a confirmation message back to
+the original requester (processor 1), processor 1 gets this block and set
 the block as **exclusive** in its cache.
 
 **vlaser** is a distributed simulator, the system consists of a collection
-of equally privileged processes, and each process simulate a CC-NUMA node
+of equally privileged processes, and each process simulates a CC-NUMA node
 which contains cache and local memory. Each process has two threads:
 + **main thread** handles the read/write procedure of local processor,
 initiates the requests to remote memories.
@@ -94,7 +94,7 @@ the **service thread**. New request will not be processed until the old
 request's handling is completely finished, which means that all the relevant
 cache statuses (local or remote) have been updated correctly and the
 acknowledgement message has been sent back to the original requester.
-This ensure the **sequential consistency** of the memory concurrent
+This ensures the **sequential consistency** of the memory concurrent
 accessing.
 
 Users may use **vlaser** as a library, construct a **cpl** class (defined
